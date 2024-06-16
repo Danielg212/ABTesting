@@ -15,25 +15,24 @@ class ABTestController {
 
       // Check if a variant is already assigned in the cookies
       const existingGroup = req.cookies.variant;
+      const test = getMatchingTest(user);
       if (existingGroup) {
-        const test = getMatchingTest(user);
         if (test && test.groups[existingGroup]) {
           const result = test.groups[existingGroup].results;
           return res.status(200).send(result);
         }
       }
-      const test = getMatchingTest(user);
       if (!test) {
         return res.status(404).json({ error: 'No matching test found' });
       }
 
-      const group = getGroupForUser(user.userId, test.groups);
+      const group = getGroupForUser(user, test.groups);
       if (group === null) {
         return res.status(500).json({ error: 'Failed to assign group' });
       }
       const result = test.groups[group].results;
 
-      res.cookie('variant', JSON.stringify(group), {
+      res.cookie('variant', group, {
         maxAge: 900000,
         httpOnly: true,
       }); // TODO use config.yaml for maxAge

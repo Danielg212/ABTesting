@@ -22,7 +22,7 @@ const evaluateCondition = (userValue: any, condition: Condition): boolean => {
 export const getMatchingTest = (user: User): Test | undefined => {
   return (config.tests as Test[]).find((test) => {
     return Object.entries(test.conditions).every(([key, condition]) => {
-      return evaluateCondition((user as any)[key], condition);
+      return evaluateCondition(user[key as keyof User], condition);
     });
   });
 };
