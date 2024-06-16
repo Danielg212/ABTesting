@@ -1,25 +1,24 @@
-interface Condition {
-    op: string;
-    value: any;
+export interface Condition {
+  op: string;
+  value: any;
 }
 
-interface Group {
-    results: string;
-    percentage: number;
+export interface Group {
+  results: string;
+  percentage: number;
 }
 
-interface Test {
-    conditions: {
-        [key: string]: Condition;
-    };
-    groups: {
-        [key: string]: Group;
-    };
+export interface Test {
+  conditions: {
+    [key: string]: Condition;
+  };
+  groups: {
+    [key: string]: Group;
+  };
 }
 
-interface User {
-    userId: string;
-    age: number;
-    name: string;
-    favorite_animal: string;
+export interface User {
+  age: number;
+  name: string;
+  favorite_animal: string;
 }
