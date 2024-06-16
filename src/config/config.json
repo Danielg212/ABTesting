@@ -1,0 +1,86 @@
+{
+  "tests": [
+    {
+      "conditions": {
+        "age": {
+          "op": ">",
+          "value": 10
+        },
+        "name": {
+          "op": "=",
+          "value": "moshe"
+        },
+        "favorite_animal": {
+          "op": "!=",
+          "value": "dog"
+        }
+      },
+      "groups": {
+        "a": {
+          "results": "im result a1",
+          "percentage": 30
+        },
+        "b": {
+          "results": "im result b1",
+          "percentage": 70
+        }
+      }
+    },
+    {
+      "conditions": {
+        "age": {
+          "op": "=",
+          "value": 10
+        },
+        "name": {
+          "op": "=",
+          "value": "israel"
+        },
+        "favorite_animal": {
+          "op": "=",
+          "value": "parrot"
+        }
+      },
+      "groups": {
+        "a": {
+          "results": "im result a2",
+          "percentage": 50
+        },
+        "b": {
+          "results": "im result b2",
+          "percentage": 50
+        }
+      }
+    },
+    {
+      "conditions": {
+        "age": {
+          "op": "!=",
+          "value": 10
+        },
+        "name": {
+          "op": "!=",
+          "value": "israel"
+        },
+        "favorite_animal": {
+          "op": "=",
+          "value": "cat"
+        }
+      },
+      "groups": {
+        "a": {
+          "results": "im result a3",
+          "percentage": 50
+        },
+        "b": {
+          "results": "im result b3",
+          "percentage": 40
+        },
+        "c": {
+          "results": "im result b3",
+          "percentage": 10
+        }
+      }
+    }
+  ]
+}
