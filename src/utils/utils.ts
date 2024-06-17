@@ -3,7 +3,7 @@ import config from '../config/config.json';
 import { Condition, Group, Test, User } from '../model/TestModel';
 import {metrics} from '../metrics/metrics';
 
-const evaluateCondition = (userValue: any, condition: Condition): boolean => {
+const evaluateCondition = (userValue: string|number, condition: Condition): boolean => {
   const { op, value } = condition;
 
   switch (op) {
@@ -23,7 +23,11 @@ const evaluateCondition = (userValue: any, condition: Condition): boolean => {
 export const getMatchingTest = (user: User): Test | undefined => {
   return (config.tests as Test[]).find((test) => {
     return Object.entries(test.conditions).every(([key, condition]) => {
-      return evaluateCondition(user[key as keyof User], condition);
+        let userValue = user[key as keyof User];
+        if(typeof userValue === 'string'){
+            userValue = userValue.toLowerCase();
+        }
+      return evaluateCondition(userValue, condition);
     });
   });
 };

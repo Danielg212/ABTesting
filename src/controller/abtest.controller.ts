@@ -13,16 +13,7 @@ class ABTestController {
           .status(400)
           .json({ error: 'age, name, and favorite_animal are required' });
       }
-
-      // Check if a variant is already assigned in the cookies
-      // const existingGroup = req.cookies.variant;
       const test = getMatchingTest(user);
-      // if (existingGroup) {
-      //   if (test && test.groups[existingGroup]) {
-      //     const result = test.groups[existingGroup].results;
-      //     return res.status(200).send(result);
-      //   }
-      // }
       if (!test) {
         return res.status(404).json({ error: 'No matching test found' });
       }
@@ -33,12 +24,7 @@ class ABTestController {
       }
       const result = test.groups[group].results;
 
-      // res.cookie('variant', group, {
-      //   maxAge: 900000,
-      //   httpOnly: true,
-      // }); // TODO use config.yaml for maxAge
-
-      return res.status(200).json({ group, result });
+      return res.status(200).send(result);
     } catch (error) {
       res.status(500).json(error);
     }
