@@ -10,12 +10,12 @@ export class Router {
     return this.app;
   }
   init() {
-    this.app.get('/hello', (request, response, next) =>
-      response.status(200).json('world!')
-    );
-
     this.app.post('/getTest', (req, res, next) =>
       abTestController.getTest(req, res)
+    );
+
+    this.app.get('/getMetrics', (req, res, next) =>
+      abTestController.getMetrics(req, res)
     );
   }
 }

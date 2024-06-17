@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 import config from '../config/config.json';
 import { Condition, Group, Test, User } from '../model/TestModel';
+import {metrics} from '../metrics/metrics';
 
 const evaluateCondition = (userValue: any, condition: Condition): boolean => {
   const { op, value } = condition;
@@ -43,6 +44,7 @@ export const getGroupForUser = (
   for (const [group, { percentage }] of Object.entries(groups)) {
     cumulativePercentage += percentage;
     if (hashInt % totalPercentage < cumulativePercentage) {
+      metrics.incrementMetric(group);
       return group;
     }
   }
