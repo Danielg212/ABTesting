@@ -95,6 +95,18 @@ Example `config.json`:
 }
 ```
 
+## POC (scipts attached on POC_TestScripts file)
+
+### Test 1 -100 calls 80%/20%
+![T1_100_calls_80_20](POC_TestScripts/T1_100_calls_80_20.png)
+
+### Test 2 - 100 calls for same user 50%/50%
+![T2_100_calls_same_user_50_50](POC_TestScripts/T2_100_calls_same_user_50_50.png)
+
+### Test 3 - 100_calls_50_40_10
+![T3_100_calls_50_40_10](POC_TestScripts/T3_100_calls_50_40_10.png)
+
+
 
 
 ## Testing
