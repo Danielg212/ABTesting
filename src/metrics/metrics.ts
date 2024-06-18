@@ -1,7 +1,6 @@
 class Metrics {
-  private metrics:Record<string, number> = {};
-  constructor() {
-  }
+  private metrics: Record<string, number> = {};
+  constructor() {}
   public addMetric(name: string, value: number): void {
     this.metrics[name] = value;
   }

@@ -1,9 +1,9 @@
 import crypto from 'crypto';
-import config from '../config/config.json';
 import { Condition, Group, Test, User } from '../model/TestModel';
-import {metrics} from '../metrics/metrics';
+import { metrics } from '../metrics/metrics';
+import { jsonFile } from '../config/FileConfig';
 
-const evaluateCondition = (userValue: string|number, condition: Condition): boolean => {
+const evaluateCondition = (userValue: string | number, condition: Condition): boolean => {
   const { op, value } = condition;
 
   switch (op) {
@@ -21,21 +21,18 @@ const evaluateCondition = (userValue: string|number, condition: Condition): bool
 };
 
 export const getMatchingTest = (user: User): Test | undefined => {
-  return (config.tests as Test[]).find((test) => {
+  return (jsonFile.tests as Test[]).find((test) => {
     return Object.entries(test.conditions).every(([key, condition]) => {
-        let userValue = user[key as keyof User];
-        if(typeof userValue === 'string'){
-            userValue = userValue.toLowerCase();
-        }
+      let userValue = user[key as keyof User];
+      if (typeof userValue === 'string') {
+        userValue = userValue.toLowerCase();
+      }
       return evaluateCondition(userValue, condition);
     });
   });
 };
 
-export const getGroupForUser = (
-  user: User,
-  groups: { [key: string]: Group }
-): string | null => {
+export const getGroupForUser = (user: User, groups: { [key: string]: Group }): string => {
   const userPropertiesString = `${user.age}-${user.name}-${user.favorite_animal}`;
   const hash = crypto
     .createHash('md5')
@@ -52,6 +49,4 @@ export const getGroupForUser = (
       return group;
     }
   }
-
-  return null;
 };

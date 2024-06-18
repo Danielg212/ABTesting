@@ -18,11 +18,11 @@
       "groups": {
         "a": {
           "results": "im result a1",
-          "percentage": 30
+          "percentage": 20
         },
         "b": {
           "results": "im result b1",
-          "percentage": 70
+          "percentage": 80
         }
       }
     },

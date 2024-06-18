@@ -9,12 +9,8 @@ export interface Group {
 }
 
 export interface Test {
-  conditions: {
-    [key: string]: Condition;
-  };
-  groups: {
-    [key: string]: Group;
-  };
+  conditions: Record<string, Condition>;
+  groups: Record<string, Group>;
 }
 
 export interface User {

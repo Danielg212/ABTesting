@@ -1,12 +1,15 @@
 import request from 'supertest';
 import app from '../app';
+import * as config from '../config/FileConfig';
 
+describe('ABTestController', () => {
+  beforeAll(async () => {
+    await config.loadConfig();
+  });
 
-// Mock the config.json file
-describe('GET /getTest', () => {
-  beforeEach(async ()=>{
-      jest.clearAllMocks()
-  })
+  beforeEach(async () => {
+    jest.clearAllMocks();
+  });
 
   it('should return the correct test result for the given user parameters', async () => {
     const response = await request(app)
@@ -14,7 +17,7 @@ describe('GET /getTest', () => {
       .send({
         age: 10,
         name: 'Israel',
-        favorite_animal: 'parrot'
+        favorite_animal: 'parrot',
       })
       .set('Accept', 'application/json');
 
@@ -22,29 +25,22 @@ describe('GET /getTest', () => {
     expect(response.text).toBe('im result a2');
   });
 
-  it('should return the same test for the same user ', async ()=>{
+  it('should return the same test for the same user ', async () => {
+    const userPayload = {
+      age: 55,
+      name: 'Daniel',
+      favorite_animal: 'cat',
+    };
+    const expectedResult = 'im result b3';
 
-      const userPayload = {
-          age: 55,
-          name: 'Daniel',
-          favorite_animal: 'cat'
-      };
-      const expectedResult = 'im result b3';
+    const firstResponse = await request(app).post('/getTest').send(userPayload).set('Accept', 'application/json');
 
-      const firstResponse = await request(app)
-          .post('/getTest')
-          .send(userPayload)
-          .set('Accept', 'application/json');
+    expect(firstResponse.text).toBe(expectedResult);
 
-      expect(firstResponse.text).toBe(expectedResult);
+    const secondResponse = await request(app).post('/getTest').send(userPayload).set('Accept', 'application/json');
 
-      const secondResponse = await request(app)
-          .post('/getTest')
-          .send(userPayload)
-          .set('Accept', 'application/json');
-
-      expect(secondResponse.text).toBe(expectedResult);
-  })
+    expect(secondResponse.text).toBe(expectedResult);
+  });
 
   it('should return 404 if no matching test is found', async () => {
     const response = await request(app)
@@ -52,7 +48,7 @@ describe('GET /getTest', () => {
       .send({
         age: 5,
         name: 'Unknown',
-        favorite_animal: 'unicorn'
+        favorite_animal: 'unicorn',
       })
       .set('Accept', 'application/json');
 
@@ -65,7 +61,7 @@ describe('GET /getTest', () => {
       .post('/getTest')
       .send({
         age: 10,
-        name: 'Israel'
+        name: 'Israel',
       })
       .set('Accept', 'application/json');
 
