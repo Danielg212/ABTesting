@@ -9,14 +9,11 @@ export class Router {
   getRoutes() {
     return this.app;
   }
-  init() {
-    this.app.post('/getTest', (req, res, next) =>
-      abTestController.getTest(req, res)
-    );
 
-    this.app.get('/getMetrics', (req, res, next) =>
-      abTestController.getMetrics(req, res)
-    );
+  init() {
+    this.app.post('/getTest', (req, res, next) => abTestController.getTest(req, res));
+
+    this.app.get('/getMetrics', (req, res, next) => abTestController.getMetrics(req, res));
   }
 }
 

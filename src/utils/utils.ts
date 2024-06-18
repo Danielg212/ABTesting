@@ -1,7 +1,9 @@
 import crypto from 'crypto';
-import { Condition, Group, Test, User } from '../model/TestModel';
+import {
+  Condition, Group, Test, User,
+} from '../model/TestModel';
 import { metrics } from '../metrics/metrics';
-import { jsonFile } from '../config/FileConfig';
+import { getConfig } from '../config/FileConfig';
 
 const evaluateCondition = (userValue: string | number, condition: Condition): boolean => {
   const { op, value } = condition;
@@ -21,15 +23,14 @@ const evaluateCondition = (userValue: string | number, condition: Condition): bo
 };
 
 export const getMatchingTest = (user: User): Test | undefined => {
-  return (jsonFile.tests as Test[]).find((test) => {
-    return Object.entries(test.conditions).every(([key, condition]) => {
-      let userValue = user[key as keyof User];
-      if (typeof userValue === 'string') {
-        userValue = userValue.toLowerCase();
-      }
-      return evaluateCondition(userValue, condition);
-    });
-  });
+  const jsonFile = getConfig();
+  return (jsonFile.tests as Test[]).find((test) => Object.entries(test.conditions).every(([key, condition]) => {
+    let userValue = user[key as keyof User];
+    if (typeof userValue === 'string') {
+      userValue = userValue.toLowerCase();
+    }
+    return evaluateCondition(userValue, condition);
+  }));
 };
 
 export const getGroupForUser = (user: User, groups: { [key: string]: Group }): string => {

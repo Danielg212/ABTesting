@@ -6,7 +6,7 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "target": "es2019",
+    "target": "ESNext",
     "mapRoot": "../dist",
     "module": "commonjs",
     "moduleResolution": "node",

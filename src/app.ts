@@ -1,7 +1,7 @@
-import routes from './routes/routs';
 import express, { Application } from 'express';
 import cookieParser from 'cookie-parser'; // Routes
 import morgan from 'morgan';
+import routes from './routes/routs';
 
 const app: Application = express();
 

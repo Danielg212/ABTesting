@@ -1,10 +1,15 @@
 import { Request, Response } from 'express';
-import { metrics } from '../metrics/metrics';
 import { Logger, ILogObj } from 'tslog';
+import { metrics } from '../metrics/metrics';
 import { getGroupForUser, getMatchingTest } from '../utils/utils';
+import { loadConfig } from '../config/FileConfig';
 
 class ABTestController {
   private readonly logger: Logger<ILogObj> = new Logger({ name: ABTestController.name, type: 'pretty' });
+
+  constructor() {
+    loadConfig();
+  }
 
   public async getTest(req: Request, res: Response) {
     try {

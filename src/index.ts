@@ -1,6 +1,6 @@
-import app from './app';
-import { loadConfig } from './config/FileConfig';
 import { ILogObj, Logger } from 'tslog';
+import app from './app';
+
 const logger: Logger<ILogObj> = new Logger();
 
 function start() {
@@ -9,8 +9,4 @@ function start() {
     logger.info(`✅ Server is listening on: http://localhost:${PORT}`);
   });
 }
-
-loadConfig().then(() => {
-  logger.info('Config loaded');
-  start();
-});
+start();

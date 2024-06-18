@@ -1,22 +1,9 @@
-FROM node:alpine as base
+FROM node:slim as base
+
+COPY . /app
 
 WORKDIR /app
 
-COPY package.json ./
-
-RUN rm -rf node_modules && npm i && npm run build
-
-COPY . .
+RUN npm i && npm run build
 
 CMD ["node", "dist/index.js"]
-
-#
-#FROM node:lts
-#
-#COPY . /app
-#
-#WORKDIR /app
-#
-#RUN npm i && npm run build
-#
-#CMD ["node", "dist/index.js"]
