@@ -1,5 +1,15 @@
 
-# A/B Test Service
+# A/B Test Service -  ABtest service, which randomly chooses items for a user according to conditions
+
+## Background
+
+We would like to provide the ability to test different flows and advertisements to our users using A/B test method where users will get different ads based on some parameters, after that,
+we can take the results to our data team to have them analyzed.
+
+For example, some users will get ads with a blue button and some with an orange button
+and we could then compare the results and see what color was more engaging.
+For that, we choose our top developer to build an AB test service that will get the user’s
+parameters and will return to the user the relevant test (A, B, C, D, etc.)
 
 ## Overview
 
